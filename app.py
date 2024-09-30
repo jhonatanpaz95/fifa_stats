@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import sqlite3
-import matplotlib.pyplot as plt
+from matplotlib import pyplot
 import seaborn as sns
 
 # Conectando ao SQLite
@@ -131,7 +131,7 @@ if not df_jogos.empty:
 
     # Gráfico de Linhas - Pontuação
     st.write("### Gráfico de Linhas - Pontuação")
-    fig, ax = plt.subplots()
+    fig, ax = pyplot.subplots()
     for jogador in jogadores:
         pontuacao_acumulada = df_jogos.apply(lambda row: 3 if row['jogador1'] == jogador and row['placar_jogador1'] > row['placar_jogador2'] else
                                              3 if row['jogador2'] == jogador and row['placar_jogador2'] > row['placar_jogador1'] else
@@ -145,7 +145,7 @@ if not df_jogos.empty:
 
     # Gráfico de Barras - Outras Estatísticas
     st.write("### Gráfico de Barras - Outras Estatísticas")
-    fig, ax = plt.subplots()
+    fig, ax = pyplot.subplots()
     df_stats_melted = pd.melt(df_stats.reset_index(), id_vars=['Jogador'], 
                               value_vars=['Gols Feitos', 'Gols Sofridos', 'Vitórias', 'Empates', 'Derrotas'], 
                               var_name='Estatística', value_name='Valor')
